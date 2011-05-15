@@ -11,7 +11,7 @@ cd nginx-1.0.2
 make && make install
 
 # Add nginx restart file
-cd /etc/init.d && wget https://github.com/meskyanichi/provisioner/raw/master/lib/nginx/nginx
+cd /etc/init.d && wget --no-check-certificate https://github.com/meskyanichi/provisioner/raw/master/lib/nginx/nginx
 chmod +x /etc/init.d/nginx
 
 # add nginx to default run levels (meaning it'll boot nginx on system-start-up)
@@ -23,4 +23,4 @@ mkdir -p /etc/nginx/conf/sites-enabled
 
 # replace default nginx configuration
 rm /etc/nginx/conf/nginx.conf
-cd /etc/nginx/conf && wget https://github.com/meskyanichi/provisioner/raw/master/lib/nginx/nginx.conf
+cd /etc/nginx/conf && wget --no-check-certificate https://github.com/meskyanichi/provisioner/raw/master/lib/nginx/nginx.conf
