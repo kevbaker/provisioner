@@ -3,23 +3,21 @@
 ## Deployment User
 
 # Add a deployment user
-# * add to rvm group for gem write permissions
+# * use the /bin/bash shell instead of /bin/sh
 # * create home dir in /home/deployer
-useradd -G rvm -m deployer
+# * set the password for the user
+useradd -s /bin/bash -m --password="$(openssl passwd qwerty)" deployer
 
-# Make deployment user use /bin/bash rather than /bin/sh
-sed -i "s/\/home\/deployer\:\/bin\/sh/\/home\/deployer\:\/bin\/bash/" /etc/passwd
+# Add user to RVM if it exists, doing it in a separate command
+# otherwise the user won't be added if the group does not exist
+usermod -G rvm deployer
 
-# Add the deployment user to sudoers
-# enabling the deployment user to perform
-# commands via sudo without providing the root password
-sed -i "/root.*ALL=(ALL) ALL/ a\deployer ALL\=\(ALL\) NOPASSWD\: ALL" /etc/sudoers
-
-# Modify the /home/deployer/.bashrc file for the deployment
-# user so RVM is properly loaded
-sed -i "s/^\[ -z \"\$PS1\" \] \&\& return/# \[ -z \"\$PS1\" \] \&\& return\n\nif \[\[ -n \"\$PS1\" \]\]; then/" /home/deployer/.bashrc
-echo -e "\nfi" >> /home/deployer/.bashrc
-echo -e "\n\n[[ -s \"/usr/local/rvm/scripts/rvm\" ]] && source \"/usr/local/rvm/scripts/rvm\"" >> /home/deployer/.bashrc
+# Add the deployment user to sudoers enabling the deployment user to perform
+# commands via sudo without providing the root password. Skip this if the user
+# is already listed
+if [[ $(cat /etc/sudoers) != *deployer* ]]; then
+  sed -i "/root.*ALL=(ALL) ALL/ a\deployer ALL\=\(ALL\) NOPASSWD\: ALL" /etc/sudoers
+fi
 
 # Add a .gemrc to the deployment user
 curl https://github.com/meskyanichi/provisioner/raw/master/lib/rvm/gemrc > /home/deployer/.gemrc
