@@ -26,5 +26,5 @@ curl https://github.com/meskyanichi/provisioner/raw/master/lib/rvm/gemrc > /home
 
 # create the deployment directory and apply
 # the correct permissions for the deployment user
-mkdir -p /var/application
-chown -R deployer:www-data /var/application
+mkdir -p /var/applications
+chown -R deployer:www-data /var/applications
