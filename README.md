@@ -26,7 +26,7 @@ Usage
 
 **SSH in to your remote server and run**
 
-    wget https://github.com/meskyanichi/provisioner/raw/master/provisioner
+    wget --no-check-certificate https://github.com/meskyanichi/provisioner/raw/master/provisioner
 
 to download the provisioner file to your server.
 
