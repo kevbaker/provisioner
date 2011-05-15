@@ -20,7 +20,7 @@ rvm install 1.9.2
 rvm use 1.9.2 --default
 
 # Add a .gemrc file to improve gem installation speed
-curl https://gist.github.com/raw/972787/3745b31a17ebe846411b281f5bc2da7ecaec5035/gemrc > ~/.gemrc
+curl https://github.com/meskyanichi/provisioner/raw/master/lib/rvm/gemrc > ~/.gemrc
 
 # Install latest bundler version so we can install all gems via Bundler
 gem install bundler

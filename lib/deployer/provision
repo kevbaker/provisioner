@@ -22,7 +22,7 @@ echo -e "\nfi" >> /home/deployer/.bashrc
 echo -e "\n\n[[ -s \"/usr/local/rvm/scripts/rvm\" ]] && source \"/usr/local/rvm/scripts/rvm\"" >> /home/deployer/.bashrc
 
 # Add the .gemrc to the deployment user as well - like we did with root
-curl https://gist.github.com/raw/972787/3745b31a17ebe846411b281f5bc2da7ecaec5035/gemrc > /home/deployer/.gemrc
+curl https://github.com/meskyanichi/provisioner/raw/master/lib/rvm/gemrc > /home/deployer/.gemrc
 
 # create the deployment directory and apply
 # the correct permissions for the deployment user
