@@ -9,3 +9,7 @@ pg_createcluster --start -e UTF-8 8.4 main
 
 # Restart the PostgreSQL server
 /etc/init.d/postgresql-8.4 restart
+
+# to-do
+# set postgresql root password
+# set deployment user and password

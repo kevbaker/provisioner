@@ -8,3 +8,5 @@ aptitude install -y mysql-client mysql-server libmysqlclient15-dev mysql-common
 
 # to-do
 # set default encoding to UTF8
+# set mysql root password
+# set deployment user and password
