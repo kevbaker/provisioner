@@ -22,9 +22,9 @@ See `lib/<module-name>/provision` for more details on each of the above modules.
 
 
 Usage
-=====
+-----
 
-**SSH in to your remote server and run**
+SSH in to your remote server and run
 
     wget --no-check-certificate https://github.com/meskyanichi/provisioner/raw/master/provisioner
 
@@ -38,6 +38,6 @@ That's it - if all goes well it should install the requested modules on your ser
 
 
 Contributing
-============
+------------
 
 If you find ways to improve the current code-base, or to add/improve functionality, feel free to fork it. If I find it a worthwhile addition I'll merge it in to master. Try to keep it consistent with the rest of the scripts.
