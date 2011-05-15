@@ -19,7 +19,7 @@ aptitude install -y \
   gcc g++ build-essential bison openssl libreadline6 libreadline6-dev \
   git-core curl wget ufw tree rsync zlib1g zlib1g-dev libssl-dev \
   libyaml-dev libxml2-dev libxslt-dev autoconf libpcre3 libpcre3-dev libpcrecpp0 \
-  libc6-dev ncurses-dev libsqlite3-0 libsqlite3-dev sqlite3
+  libc6-dev ncurses-dev
 
 
 ## Modules - Uncomment the modules you'd like to install

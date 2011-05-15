@@ -2,6 +2,12 @@
 
 ## Ruby Version Manager
 
+# Install MRI dependencies
+aptitude install -y libsqlite3-0 libsqlite3-dev sqlite3
+
+# Install JRuby dependencies
+aptitude install -y openjdk-6-jre-headless
+
 # Install RVM as root (system-wide install)
 bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
 
