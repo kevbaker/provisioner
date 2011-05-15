@@ -1,14 +1,14 @@
 #! /bin/bash
 
-# Change SSH port from 22 to 1337
-# so the deployment user can only log in via port '1337'
-sed -i "s/Port 22/Port 1337/" /etc/ssh/sshd_config
+# Change SSH port from 22 to $SECURITY_PORT
+# so the deployment user can only log in via port '$SECURITY_PORT'
+sed -i "s/Port 22/Port $SECURITY_PORT/" /etc/ssh/sshd_config
 /etc/init.d/ssh reload
 
 # Set up firewall to whitelist ports
-ufw allow 1337     # ssh port
-ufw allow 80       # nginx http port
-ufw allow 443      # nginx https port
+ufw allow $SECURITY_PORT # ssh port
+ufw allow 80             # nginx http port
+ufw allow 443            # nginx https port
 ufw allow proto tcp from any to any port 3000:3010 # allow range 3000:3010 (ruby app servers)
 ufw --force enable # enable without prompt
 

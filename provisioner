@@ -74,14 +74,17 @@ aptitude install -y \
 #
 # install nodejs
 
-## ImageMagick module
+##
+# ImageMagick module
 #
 # install imagemagick
 
-## FFMpeg module
+##
+# FFMpeg module
 #
 # install ffmpeg
 
 ## Security module
 #
+# export SECURITY_PORT=22
 # install security
