@@ -1,0 +1,18 @@
+#! /bin/bash
+
+# Clone, Configure and Install Node.js from source
+mkdir -p ~/tmp && cd ~/tmp
+git clone https://github.com/joyent/node.git && cd node
+./configure --prefix=/etc/node
+make && make install
+
+# add load path to root's .bashrc if deployer exists
+echo -e "\nexport PATH=/etc/node/bin:\$PATH" >> ~/.bashrc
+
+# add load path to deployer's .bashrc if deployer exists
+if [[ -f "/home/deployer/.bashrc" ]]; then
+  echo -e "\nexport PATH=/etc/node/bin:\$PATH" >> /home/deployer/.bashrc
+fi
+
+# Install NPM - a package manager for installing additional libs
+curl http://npmjs.org/install.sh | sh

@@ -48,6 +48,9 @@ aptitude install -y \
 # Redis module
 # install redis
 
+# Node.js module
+# install nodejs
+
 # ImageMagick module
 # install imagemagick
 
