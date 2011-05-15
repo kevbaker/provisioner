@@ -1,0 +1,4 @@
+#! /bin/bash
+
+# Install SQlite3 packages
+aptitude install -y libsqlite3-0 libsqlite3-dev sqlite3

@@ -10,6 +10,7 @@ Simple Server Provisioning
 - deployer (deployment user)
 - mysql
 - postgresql
+- sqlite
 - mongodb
 - redis
 - security (basic security measures you may want to take)

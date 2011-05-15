@@ -40,6 +40,9 @@ aptitude install -y \
 # PostgreSQL module
 # install postgresql
 
+# SQLite module
+# install sqlite
+
 # MongoDB module
 # install mongodb
 
