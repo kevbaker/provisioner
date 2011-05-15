@@ -4,7 +4,7 @@
 export DEBIAN_FRONTEND=noninteractive
 
 # Install MySQL client and server
-aptitude install -y mysql-client mysql-server libmysqlclient15off libmysqlclient15-dev mysql-common
+aptitude install -y mysql-client mysql-server libmysqlclient15-dev mysql-common
 
 # to-do
 # set default encoding to UTF8
