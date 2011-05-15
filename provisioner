@@ -1,5 +1,9 @@
 #! /bin/bash
 
+install(){
+  curl https://github.com/meskyanichi/provisioner/raw/master/lib/$1/provision | bash
+}
+
 ## Basic package updates, upgrades and new installations
 
 # Install aptitude package manager
@@ -19,38 +23,34 @@ aptitude install -y \
   libpcre3 libpcre3-dev libpcrecpp0 libssl-dev zlib1g-dev
 
 
-## Modules
-
-install(){
-  curl https://github.com/meskyanichi/provisioner/raw/master/lib/$1/provision | bash
-}
+## Modules - Uncomment the modules you'd like to install
 
 # NGINX module
-install nginx
+# install nginx
 
 # Ruby Version Manager module
-install rvm
+# install rvm
 
 # Deployment User module
-install deployer
+# install deployer
 
 # MySQL module
-install mysql
+# install mysql
 
 # PostgreSQL module
-install postgresql
+# install postgresql
 
 # MongoDB module
-install mongodb
+# install mongodb
 
 # Redis module
-install redis
+# install redis
 
 # ImageMagick module
-install imagemagick
+# install imagemagick
 
 # FFMpeg module
-install ffmpeg
+# install ffmpeg
 
 # Security module
-install security
+# install security
