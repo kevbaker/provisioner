@@ -6,12 +6,12 @@ git clone https://github.com/joyent/node.git && cd node
 ./configure --prefix=/etc/node
 make && make install
 
-# add load path to root's .bashrc if deployer exists
+# add load path to root's .bashrc if $DEPLOYER_USERNAME exists
 echo -e "\nexport PATH=/etc/node/bin:\$PATH" >> ~/.bashrc
 
-# add load path to deployer's .bashrc if deployer exists
-if [[ -f "/home/deployer/.bashrc" ]]; then
-  echo -e "\nexport PATH=/etc/node/bin:\$PATH" >> /home/deployer/.bashrc
+# add load path to $DEPLOYER_USERNAME's .bashrc if $DEPLOYER_USERNAME exists
+if [[ -f "/home/$DEPLOYER_USERNAME/.bashrc" ]]; then
+  echo -e "\nexport PATH=/etc/node/bin:\$PATH" >> /home/$DEPLOYER_USERNAME/.bashrc
 fi
 
 # Install NPM - a package manager for installing additional libs

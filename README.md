@@ -7,13 +7,13 @@ Simple Server Provisioning
 
 - nginx
 - rvm
-- deployer (deployment user)
+- deployer
 - mysql
 - postgresql
 - sqlite
 - mongodb
 - redis
-- security (basic security measures you may want to take)
+- security
 - imagemagick
 - ffmpeg
 

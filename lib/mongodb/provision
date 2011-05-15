@@ -5,13 +5,13 @@ cd ~/tmp
 # If running on a 64bit OS - download and install the 64bit package.
 # Otherwise download and install the 32bit package
 if [[ $(uname -m) == 'x86_64' ]]; then
-  wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-1.8.1.tgz
-  tar -xf mongodb-linux-x86_64-1.8.1.tgz
-  mv mongodb-linux-x86_64-1.8.1 /etc/mongodb
+  wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-$MONGODB_VERSION.tgz
+  tar -xf mongodb-linux-x86_64-$MONGODB_VERSION.tgz
+  mv mongodb-linux-x86_64-$MONGODB_VERSION /etc/mongodb
 else
-  wget http://fastdl.mongodb.org/linux/mongodb-linux-i686-1.8.1.tgz
-  tar -xf mongodb-linux-i686-1.8.1.tgz
-  mv mongodb-linux-i686-1.8.1 /etc/mongodb
+  wget http://fastdl.mongodb.org/linux/mongodb-linux-i686-$MONGODB_VERSION.tgz
+  tar -xf mongodb-linux-i686-$MONGODB_VERSION.tgz
+  mv mongodb-linux-i686-$MONGODB_VERSION /etc/mongodb
 fi
 
 # Create /data/db for mongodb data
@@ -20,7 +20,7 @@ mkdir -p /data/db
 # add load path to root's .bashrc
 echo -e "\nexport PATH=/etc/mongodb/bin:\$PATH" >> ~/.bashrc
 
-# add load path to deployer's .bashrc if deployer exists
-if [[ -f "/home/deployer/.bashrc" ]]; then
-  echo -e "\nexport PATH=/etc/mongodb/bin:\$PATH" >> /home/deployer/.bashrc
+# add load path to $DEPLOYER_USERNAME's .bashrc if $DEPLOYER_USERNAME exists
+if [[ -f "/home/$DEPLOYER_USERNAME/.bashrc" ]]; then
+  echo -e "\nexport PATH=/etc/mongodb/bin:\$PATH" >> /home/$DEPLOYER_USERNAME/.bashrc
 fi

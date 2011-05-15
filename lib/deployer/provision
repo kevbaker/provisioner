@@ -1,28 +1,26 @@
 #! /bin/bash
 
-## Deployment User
-
 # Add a deployment user
 # * use the /bin/bash shell instead of /bin/sh
-# * create home dir in /home/deployer
+# * create home dir in /home/$DEPLOYER_USERNAME
 # * set the password for the user
-useradd -s /bin/bash -m --password="$(openssl passwd qwerty)" deployer
+useradd -s /bin/bash -m --password="$(openssl passwd $DEPLOYER_PASSWORD)" $DEPLOYER_USERNAME
 
 # Add user to RVM if it exists, doing it in a separate command
 # otherwise the user won't be added if the group does not exist
-usermod -G rvm deployer
+usermod -G rvm $DEPLOYER_USERNAME
 
 # Add the deployment user to sudoers enabling the deployment user to perform
 # commands via sudo without providing the root password. Skip this if the user
 # is already listed
-if [[ $(cat /etc/sudoers) != *deployer* ]]; then
-  sed -i "/root.*ALL=(ALL) ALL/ a\deployer ALL\=\(ALL\) NOPASSWD\: ALL" /etc/sudoers
+if [[ $(cat /etc/sudoers) != *$DEPLOYER_USERNAME* ]]; then
+  sed -i "/root.*ALL=(ALL) ALL/ a\\$DEPLOYER_USERNAME ALL\=\(ALL\) NOPASSWD\: ALL" /etc/sudoers
 fi
 
 # Add a .gemrc to the deployment user
-curl https://github.com/meskyanichi/provisioner/raw/master/lib/rvm/gemrc > /home/deployer/.gemrc
+curl https://github.com/meskyanichi/provisioner/raw/master/lib/rvm/gemrc > /home/$DEPLOYER_USERNAME/.gemrc
 
 # create the deployment directory and apply
 # the correct permissions for the deployment user
 mkdir -p /var/applications
-chown -R deployer:www-data /var/applications
+chown -R $DEPLOYER_USERNAME:www-data /var/applications

@@ -1,12 +1,10 @@
 #! /bin/bash
 
-## NGINX Web Server
-
 # Install NGINX web server
 mkdir -p ~/tmp && cd ~/tmp
-wget http://nginx.org/download/nginx-1.0.2.tar.gz
-tar -zxvf nginx-1.0.2.tar.gz
-cd nginx-1.0.2
+wget http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz
+tar -zxvf nginx-$NGINX_VERSION.tar.gz
+cd nginx-$NGINX_VERSION
 ./configure --prefix=/etc/nginx --sbin-path=/usr/local/sbin --with-http_ssl_module
 make && make install
 

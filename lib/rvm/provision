@@ -1,7 +1,5 @@
 #! /bin/bash
 
-## Ruby Version Manager
-
 # Install MRI dependencies
 aptitude install -y libsqlite3-0 libsqlite3-dev sqlite3
 
@@ -23,9 +21,9 @@ fi
 rvm get latest
 rvm reload
 
-# Install latest MRI Ruby (1.9.2)
-rvm install 1.9.2
-rvm use 1.9.2 --default
+# Install RVM_RUBY_VERSION
+rvm install $RVM_RUBY_VERSION
+rvm use $RVM_RUBY_VERSION --default
 
 # Add a .gemrc file to improve gem installation speed
 curl https://github.com/meskyanichi/provisioner/raw/master/lib/rvm/gemrc > ~/.gemrc

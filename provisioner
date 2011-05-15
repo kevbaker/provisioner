@@ -24,38 +24,64 @@ aptitude install -y \
 
 ## Modules - Uncomment the modules you'd like to install
 
+##
 # Ruby Version Manager module
+#
+# export RVM_RUBY_VERSION=1.9.2
 # install rvm
 
+##
 # Deployment User module
+#
+# export DEPLOYER_USERNAME=deployer
+# export DEPLOYER_PASSWORD=qwerty
 # install deployer
 
+##
 # NGINX module
+#
+# export NGINX_VERSION=1.0.2
 # install nginx
 
+##
 # MySQL module
+#
 # install mysql
 
+##
 # PostgreSQL module
+#
 # install postgresql
 
+##
 # SQLite module
+#
 # install sqlite
 
+##
 # MongoDB module
+#
+# export MONGODB_VERSION=1.8.1
 # install mongodb
 
+##
 # Redis module
+#
 # install redis
 
+##
 # Node.js module
+#
 # install nodejs
 
-# ImageMagick module
+## ImageMagick module
+#
 # install imagemagick
 
-# FFMpeg module
+## FFMpeg module
+#
 # install ffmpeg
 
-# Security module
+## Security module
+#
 # install security
