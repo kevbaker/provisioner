@@ -16,3 +16,11 @@ fi
 
 # Create /data/db for mongodb data
 mkdir -p /data/db
+
+# add load path to root's .bashrc
+echo -e "\nexport PATH=/etc/mongodb/bin:\$PATH" >> ~/.bashrc
+
+# add load path to deployer's .bashrc if deployer exists
+if [[ -f "/home/deployer/.bashrc" ]]; then
+  echo -e "\nexport PATH=/etc/mongodb/bin:\$PATH" >> /home/deployer/.bashrc
+fi
