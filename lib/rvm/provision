@@ -12,10 +12,12 @@ aptitude install -y openjdk-6-jre-headless
 bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
 
 # Adjust the ~/.bashrc file for RVM
-sed -i "s/^\[ -z \"\$PS1\" \] \&\& return/# \[ -z \"\$PS1\" \] \&\& return\n\nif \[\[ -n \"\$PS1\" \]\]; then/" ~/.bashrc
-echo -e "\nfi" >> ~/.bashrc
-echo -e "\n\n[[ -s \"/usr/local/rvm/scripts/rvm\" ]] && source \"/usr/local/rvm/scripts/rvm\"" >> ~/.bashrc
-source ~/.bashrc
+if [[ $(cat ~/.bashrc) != */usr/local/rvm/scripts/rvm* ]]; then
+  sed -i "s/^\[ -z \"\$PS1\" \] \&\& return/# \[ -z \"\$PS1\" \] \&\& return\n\nif \[\[ -n \"\$PS1\" \]\]; then/" ~/.bashrc
+  echo -e "\nfi" >> ~/.bashrc
+  echo -e "\n\n[[ -s \"/usr/local/rvm/scripts/rvm\" ]] && source \"/usr/local/rvm/scripts/rvm\"" >> ~/.bashrc
+  source ~/.bashrc
+fi
 
 # Ensure latest (stable) RVM version is installed
 rvm get latest
