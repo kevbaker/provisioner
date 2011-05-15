@@ -1,0 +1,30 @@
+#! /bin/bash
+
+## Deployment User
+
+# Add a deployment user
+# * add to rvm group for gem write permissions
+# * create home dir in /home/deployer
+useradd -G rvm -m deployer
+
+# Make deployment user use /bin/bash rather than /bin/sh
+sed -i "s/\/home\/deployer\:\/bin\/sh/\/home\/deployer\:\/bin\/bash/" /etc/passwd
+
+# Add the deployment user to sudoers
+# enabling the deployment user to perform
+# commands via sudo without providing the root password
+sed -i "/root.*ALL=(ALL) ALL/ a\deployer ALL\=\(ALL\) NOPASSWD\: ALL" /etc/sudoers
+
+# Modify the /home/deployer/.bashrc file for the
+# deployment user as well so RVM is properly loaded
+sed -i "s/^\[ -z \"\$PS1\" \] \&\& return/# \[ -z \"\$PS1\" \] \&\& return\n\nif \[\[ -n \"\$PS1\" \]\]; then/" /home/deployer/.bashrc
+echo -e "\nfi" >> /home/deployer/.bashrc
+echo -e "\n\n[[ -s \"/usr/local/rvm/scripts/rvm\" ]] && source \"/usr/local/rvm/scripts/rvm\"" >> /home/deployer/.bashrc
+
+# Add the .gemrc to the deployment user as well - like we did with root
+curl https://gist.github.com/raw/972787/3745b31a17ebe846411b281f5bc2da7ecaec5035/gemrc > /home/deployer/.gemrc
+
+# create the deployment directory and apply
+# the correct permissions for the deployment user
+mkdir -p /var/application
+chown -R deployer:www-data /var/application

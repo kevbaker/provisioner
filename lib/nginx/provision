@@ -1,0 +1,26 @@
+#! /bin/bash
+
+## NGINX Web Server
+
+# Install NGINX web server
+mkdir -p ~/tmp && cd ~/tmp
+wget http://nginx.org/download/nginx-1.0.2.tar.gz
+tar -zxvf nginx-1.0.2.tar.gz
+cd nginx-1.0.2
+./configure --prefix=/etc/nginx --sbin-path=/usr/local/sbin --with-http_ssl_module
+make && make install
+
+# Add nginx restart file
+cd /etc/init.d && wget https://github.com/meskyanichi/provisioner/raw/master/lib/nginx/nginx
+chmod +x /etc/init.d/nginx
+
+# add nginx to default run levels (meaning it'll boot nginx on system-start-up)
+/usr/sbin/update-rc.d -f nginx defaults
+
+# make sites-enabled and log directories
+mkdir -p /var/nginx/log/
+mkdir -p /etc/nginx/conf/sites-enabled
+
+# replace default nginx configuration
+rm /etc/nginx/conf/nginx.conf
+cd /etc/nginx/conf && wget https://github.com/meskyanichi/provisioner/raw/master/lib/nginx/nginx.conf

@@ -1,0 +1,56 @@
+#! /bin/bash
+
+## Basic package updates, upgrades and new installations
+
+# Install aptitude package manager
+apt-get update -y
+apt-get install -y aptitude
+
+# Update and upgrade package list
+aptitude update -y
+aptitude upgrade -y
+
+# Install a bunch of necessary packages
+aptitude install -y \
+  gcc g++ build-essential bison openssl libreadline6 \
+  libreadline6-dev git-core curl wget ufw tree rsync zlib1g zlib1g-dev \
+  libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev \
+  sqlite3 libxml2-dev libxslt-dev autoconf \
+  libpcre3 libpcre3-dev libpcrecpp0 libssl-dev zlib1g-dev
+
+
+## Modules
+
+install(){
+  curl https://github.com/meskyanichi/provisioner/raw/master/lib/$1/provision | bash
+}
+
+# NGINX module
+install nginx
+
+# Ruby Version Manager module
+install rvm
+
+# Deployment User module
+install deployer
+
+# MySQL module
+install mysql
+
+# PostgreSQL module
+install postgresql
+
+# MongoDB module
+install mongodb
+
+# Redis module
+install redis
+
+# ImageMagick module
+install imagemagick
+
+# FFMpeg module
+install ffmpeg
+
+# Security module
+install security

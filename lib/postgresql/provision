@@ -1,0 +1,11 @@
+#! /bin/bash
+
+# Install PostgreSQL
+aptitude install -y postgresql
+
+# Drop and Re-add the main cluster - but with UTF-8 encoding
+pg_dropcluster --stop 8.4 main
+pg_createcluster --start -e UTF-8 8.4 main
+
+# Restart the PostgreSQL server
+/etc/init.d/postgresql-8.4 restart
