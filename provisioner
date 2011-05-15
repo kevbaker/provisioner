@@ -24,14 +24,14 @@ aptitude install -y \
 
 ## Modules - Uncomment the modules you'd like to install
 
-# NGINX module
-# install nginx
-
 # Ruby Version Manager module
 # install rvm
 
 # Deployment User module
 # install deployer
+
+# NGINX module
+# install nginx
 
 # MySQL module
 # install mysql

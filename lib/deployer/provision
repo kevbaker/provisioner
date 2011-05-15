@@ -15,13 +15,13 @@ sed -i "s/\/home\/deployer\:\/bin\/sh/\/home\/deployer\:\/bin\/bash/" /etc/passw
 # commands via sudo without providing the root password
 sed -i "/root.*ALL=(ALL) ALL/ a\deployer ALL\=\(ALL\) NOPASSWD\: ALL" /etc/sudoers
 
-# Modify the /home/deployer/.bashrc file for the
-# deployment user as well so RVM is properly loaded
+# Modify the /home/deployer/.bashrc file for the deployment
+# user so RVM is properly loaded
 sed -i "s/^\[ -z \"\$PS1\" \] \&\& return/# \[ -z \"\$PS1\" \] \&\& return\n\nif \[\[ -n \"\$PS1\" \]\]; then/" /home/deployer/.bashrc
 echo -e "\nfi" >> /home/deployer/.bashrc
 echo -e "\n\n[[ -s \"/usr/local/rvm/scripts/rvm\" ]] && source \"/usr/local/rvm/scripts/rvm\"" >> /home/deployer/.bashrc
 
-# Add the .gemrc to the deployment user as well - like we did with root
+# Add a .gemrc to the deployment user
 curl https://github.com/meskyanichi/provisioner/raw/master/lib/rvm/gemrc > /home/deployer/.gemrc
 
 # create the deployment directory and apply
