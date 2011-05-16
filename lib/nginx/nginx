@@ -28,7 +28,7 @@ start() {
 # Stops the NGINX web server
 stop() {
   echo "Stopping NGINX!"
-  kill -QUIT $(cat /etc/nginx/logs/nginx.pid)
+  kill -QUIT $(cat /etc/nginx/tmp/pids/nginx.pid)
 }
 
 ##
@@ -44,14 +44,14 @@ restart() {
 # configuration to take effect
 reload() {
   echo "Reloading NGINX!"
-  kill -HUP $(cat /etc/nginx/logs/nginx.pid)
+  kill -HUP $(cat /etc/nginx/tmp/pids/nginx.pid)
 }
 
 ##
 # Forces the NGINX process to shut down
 force_stop() {
   echo "Force Quitting NGINX!"
-  kill -TERM $(cat /etc/nginx/logs/nginx.pid)
+  kill -TERM $(cat /etc/nginx/tmp/pids/nginx.pid)
 }
 
 $1

@@ -15,8 +15,9 @@ chmod +x /etc/init.d/nginx
 # add nginx to default run levels (meaning it'll boot nginx on system-start-up)
 /usr/sbin/update-rc.d -f nginx defaults
 
-# make sites-enabled and log directories
-mkdir -p /var/nginx/log/
+# make sites-enabled, logs and tmp/pids directories
+mkdir -p /etc/nginx/logs/
+mkdir -p /etc/nginx/tmp/pids/
 mkdir -p /etc/nginx/conf/sites-enabled
 
 # replace default nginx configuration
