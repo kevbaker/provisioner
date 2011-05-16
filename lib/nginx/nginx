@@ -1,64 +1,57 @@
-#! /bin/sh
+#! /bin/bash
 
-### BEGIN INIT INFO
-# Provides:          nginx
-# Required-Start:    $all
-# Required-Stop:     $all
-# Default-Start:     2 3 4 5
-# Default-Stop:      0 1 6
-# Short-Description: starts the nginx web server
-# Description:       starts nginx using start-stop-daemon
-### END INIT INFO
+##
+# A simple start/stop/restart/reload/force_stop NGINX script for the Provisioner project
+# by Michael van Rooijen - https://github.com/meskyanichi/provisioner
 
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+##
+# INSTALLATION
+#
+#  Place this file in /etc/init.d/nginx and chmod +x it to make it executable
+#
+# USAGE
+#
+#  /etc/init.d/nginx [start|stop|restart|reload|force_stop]
+#
 
-DAEMON=/usr/local/sbin/nginx
-NAME=nginx
-DESC=nginx
+##
+# Released under the "MIT LICENSE"
 
-test -x $DAEMON || exit 0
+##
+# Starts the NGINX web server
+start() {
+  echo "Starting NGINX!"
+  nginx -c /etc/nginx/conf/nginx.conf
+}
 
-# Include nginx defaults if available
-if [ -f /etc/default/nginx ] ; then
-        . /etc/default/nginx
-fi
+##
+# Stops the NGINX web server
+stop() {
+  echo "Stopping NGINX!"
+  kill -QUIT $(cat /etc/nginx/logs/nginx.pid)
+}
 
-set -e
+##
+# Restarts (by stopping and starting) the NGINX web server
+restart() {
+  echo "Restarting NGINX!"
+  stop && sleep 1 && start
+}
 
-case "$1" in
-  start)
-        echo -n "Starting $DESC: "
-        start-stop-daemon --start --quiet --pidfile /usr/local/nginx/logs/$NAME.pid \
-                --exec $DAEMON -- $DAEMON_OPTS
-        echo "$NAME."
-        ;;
-  stop)
-        echo -n "Stopping $DESC: "
-        start-stop-daemon --stop --quiet --pidfile /usr/local/nginx/logs/$NAME.pid \
-                --exec $DAEMON
-        echo "$NAME."
-        ;;
+##
+# Reloads the NGINX configuration file, gracefully shutting down the
+# NGINX worker processes and starting them up again for the adjusted
+# configuration to take effect
+reload() {
+  echo "Reloading NGINX!"
+  kill -HUP $(cat /etc/nginx/logs/nginx.pid)
+}
 
-  restart|force-reload)
-        echo -n "Restarting $DESC: "
-        start-stop-daemon --stop --quiet --pidfile \
-                /usr/local/nginx/logs/$NAME.pid --exec $DAEMON
-        sleep 1
-        start-stop-daemon --start --quiet --pidfile \
-                /usr/local/nginx/logs/$NAME.pid --exec $DAEMON -- $DAEMON_OPTS
-        echo "$NAME."
-        ;;
-  reload)
-      echo -n "Reloading $DESC configuration: "
-      start-stop-daemon --stop --signal HUP --quiet --pidfile /usr/local/nginx/logs/$NAME.pid \
-          --exec $DAEMON
-      echo "$NAME."
-      ;;
-  *)
-        N=/etc/init.d/$NAME
-        echo "Usage: $N {start|stop|restart|reload|force-reload}" >&2
-        exit 1
-        ;;
-esac
+##
+# Forces the NGINX process to shut down
+force_stop() {
+  echo "Force Quitting NGINX!"
+  kill -TERM $(cat /etc/nginx/logs/nginx.pid)
+}
 
-exit 0
+$1
