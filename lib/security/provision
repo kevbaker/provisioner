@@ -9,7 +9,6 @@ sed -i "s/Port 22/Port $SECURITY_PORT/" /etc/ssh/sshd_config
 ufw allow $SECURITY_PORT # ssh port
 ufw allow 80             # nginx http port
 ufw allow 443            # nginx https port
-ufw allow proto tcp from any to any port 3000:3010 # allow range 3000:3010 (ruby app servers)
 ufw --force enable # enable without prompt
 
 # disable root password - log in via the deployment user and
