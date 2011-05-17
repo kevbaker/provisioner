@@ -1,4 +1,14 @@
-#! /bin/bash
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:          nginx
+# Required-Start:    $all
+# Required-Stop:     $all
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: starts the nginx web server
+# Description:       starts nginx using start-stop-daemon
+### END INIT INFO
 
 ##
 # A simple start/stop/restart/reload/force_stop NGINX script for the Provisioner project
@@ -9,49 +19,69 @@
 #
 #  Place this file in /etc/init.d/nginx and chmod +x it to make it executable
 #
-# USAGE
+# START NGINX ON SYSTEM BOOT (optional)
+#
+#  update-rc.d -f nginx defaults
+#
+# MANUAL USAGE
 #
 #  /etc/init.d/nginx [start|stop|restart|reload|force_stop]
 #
 
-##
-# Released under the "MIT LICENSE"
+# Set the PATH variable so it can find all the necessary utilities
+PATH=/bin:/usr/local/sbin
 
-##
-# Starts the NGINX web server
-start() {
-  echo "Starting NGINX!"
-  nginx -c /etc/nginx/conf/nginx.conf
-}
+# Holds the path to the NGINX pid file
+NGINX_PID=/etc/nginx/tmp/pids/nginx.pid
 
-##
-# Stops the NGINX web server
-stop() {
-  echo "Stopping NGINX!"
-  kill -QUIT $(cat /etc/nginx/tmp/pids/nginx.pid)
-}
+# Holds the path to the NGINX config file
+NGINX_CONF=/etc/nginx/conf/nginx.conf
 
-##
-# Restarts (by stopping and starting) the NGINX web server
-restart() {
-  echo "Restarting NGINX!"
-  stop && sleep 1 && start
-}
+if [ -z $1 ]; then
+  echo
+  echo "USAGE"
+  echo
+  echo "  /etc/init.d/nginx [start|stop|restart|reload|force_stop]"
+  echo
+  exit 0
+fi
 
-##
-# Reloads the NGINX configuration file, gracefully shutting down the
-# NGINX worker processes and starting them up again for the adjusted
-# configuration to take effect
-reload() {
-  echo "Reloading NGINX!"
-  kill -HUP $(cat /etc/nginx/tmp/pids/nginx.pid)
-}
+case "$1" in
+  start)
+    if [ -f $NGINX_PID ]; then
+      echo "NGINX is already running."
+    else
+      echo "Starting NGINX!"
+      nginx -c $NGINX_CONF
+    fi ;;
+  stop)
+    if [ -f $NGINX_PID ]; then
+      echo "Stopping NGINX!"
+      kill -QUIT $(cat $NGINX_PID)
+    else
+      echo "NGINX isn't running."
+    fi ;;
+  restart)
+    if [ -f $NGINX_PID ]; then
+      echo "Restarting NGINX!"
+      kill -QUIT $(cat $NGINX_PID) && sleep 1 && nginx -c $NGINX_CONF
+    else
+      echo "NGINX isn't running."
+    fi ;;
+  reload)
+    if [ -f $NGINX_PID ]; then
+      echo "Reloading NGINX!"
+      kill -HUP $(cat $NGINX_PID)
+    else
+      echo "NGINX isn't running."
+    fi ;;
+  force_stop)
+    if [ -f $NGINX_PID ]; then
+      echo "Force Quitting NGINX!"
+      kill -TERM $(cat $NGINX_PID)
+    else
+      echo "NGINX isn't running."
+    fi ;;
+esac
 
-##
-# Forces the NGINX process to shut down
-force_stop() {
-  echo "Force Quitting NGINX!"
-  kill -TERM $(cat /etc/nginx/tmp/pids/nginx.pid)
-}
-
-$1
+exit 0
