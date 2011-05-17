@@ -25,17 +25,23 @@ aptitude install -y \
 ## Modules - Uncomment the modules you'd like to install
 
 ##
+# Deployment User module
+#
+export DEPLOYER_USERNAME=deployer
+export DEPLOYER_PASSWORD=qwerty
+install deployer
+
+##
+# Security module
+#
+export SECURITY_SSH_PORT=22
+install security
+
+##
 # Ruby Version Manager module
 #
 # export RVM_RUBY_VERSION=1.9.2
 # install rvm
-
-##
-# Deployment User module
-#
-# export DEPLOYER_USERNAME=deployer
-# export DEPLOYER_PASSWORD=qwerty
-# install deployer
 
 ##
 # NGINX module
@@ -83,8 +89,3 @@ aptitude install -y \
 # FFMpeg module
 #
 # install ffmpeg
-
-## Security module
-#
-# export SECURITY_PORT=22
-# install security

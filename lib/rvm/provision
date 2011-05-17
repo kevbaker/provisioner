@@ -37,3 +37,6 @@ mkdir -p /var/bluepill && chown -R $DEPLOYER_USERNAME:www-data /var/bluepill
 
 # Install Backup for performing backups
 gem install backup
+
+# Ensure the deployment user is added to the RVM group
+usermod -G rvm $DEPLOYER_USERNAME
