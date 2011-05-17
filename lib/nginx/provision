@@ -12,9 +12,6 @@ make && make install
 cd /etc/init.d && wget --no-check-certificate https://github.com/meskyanichi/provisioner/raw/master/lib/nginx/nginx
 chmod +x /etc/init.d/nginx
 
-# add nginx to default run levels (meaning it'll boot nginx on system-start-up)
-/usr/sbin/update-rc.d -f nginx defaults
-
 # make sites-enabled, logs and tmp/pids directories
 mkdir -p /etc/nginx/logs/
 mkdir -p /etc/nginx/tmp/pids/
