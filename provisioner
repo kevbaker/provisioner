@@ -17,9 +17,9 @@ aptitude upgrade -y
 # Install a bunch of necessary packages
 aptitude install -y \
   gcc g++ build-essential bison openssl libreadline6 libreadline6-dev \
-  htop git-core curl wget ufw tree rsync zlib1g zlib1g-dev libssl-dev \
-  libyaml-dev libxml2-dev libxslt-dev autoconf libpcre3 libpcre3-dev libpcrecpp0 \
-  libc6-dev ncurses-dev
+  htop git-core curl wget ufw tree rsync psmisc nano vim \
+  zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev \
+  autoconf libpcre3 libpcre3-dev libpcrecpp0 libc6-dev ncurses-dev
 
 
 ## Modules - Uncomment the modules you'd like to install
