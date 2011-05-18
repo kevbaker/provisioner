@@ -17,10 +17,6 @@ if [[ $(cat ~/.bashrc) != */usr/local/rvm/scripts/rvm* ]]; then
   source ~/.bashrc
 fi
 
-# Ensure latest (stable) RVM version is installed
-rvm get latest
-rvm reload
-
 # Install RVM_RUBY_VERSION
 rvm install $RVM_RUBY_VERSION
 rvm use $RVM_RUBY_VERSION --default
