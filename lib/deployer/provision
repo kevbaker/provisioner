@@ -6,6 +6,10 @@
 # * set the password for the user
 useradd -s /bin/bash -m --password="$(openssl passwd $DEPLOYER_PASSWORD)" $DEPLOYER_USERNAME
 
+# Ensure RACK_ENV is always runs in production
+echo -e "export RACK_ENV=production\n" | cat - /home/$DEPLOYER_USERNAME/.bashrc > /home/$DEPLOYER_USERNAME/.bashrc.tmp
+mv /home/$DEPLOYER_USERNAME/.bashrc.tmp /home/$DEPLOYER_USERNAME/.bashrc
+
 # Add user to RVM if it exists, doing it in a separate command
 # otherwise the user won't be added if the group does not exist
 usermod -G rvm $DEPLOYER_USERNAME
@@ -19,6 +23,7 @@ fi
 
 # Add a .gemrc to the deployment user
 curl https://raw.github.com/meskyanichi/provisioner/master/lib/rvm/gemrc > /home/$DEPLOYER_USERNAME/.gemrc
+chown deployer:deployer /home/$DEPLOYER_USERNAME/.gemrc
 
 # create the deployment directory and apply
 # the correct permissions for the deployment user
