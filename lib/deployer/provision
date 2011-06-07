@@ -18,7 +18,7 @@ if [[ $(cat /etc/sudoers) != *$DEPLOYER_USERNAME* ]]; then
 fi
 
 # Add a .gemrc to the deployment user
-curl https://github.com/meskyanichi/provisioner/raw/master/lib/rvm/gemrc > /home/$DEPLOYER_USERNAME/.gemrc
+curl https://raw.github.com/meskyanichi/provisioner/master/lib/rvm/gemrc > /home/$DEPLOYER_USERNAME/.gemrc
 
 # create the deployment directory and apply
 # the correct permissions for the deployment user

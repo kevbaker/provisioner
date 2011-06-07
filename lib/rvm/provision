@@ -22,7 +22,7 @@ rvm install $RVM_RUBY_VERSION
 rvm use $RVM_RUBY_VERSION --default
 
 # Add a .gemrc file to improve gem installation speed
-curl https://github.com/meskyanichi/provisioner/raw/master/lib/rvm/gemrc > ~/.gemrc
+curl https://raw.github.com/meskyanichi/provisioner/master/lib/rvm/gemrc > ~/.gemrc
 
 # Install latest bundler version so we can install all application gems
 gem install bundler
