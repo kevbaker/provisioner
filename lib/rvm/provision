@@ -26,13 +26,10 @@ curl https://raw.github.com/meskyanichi/provisioner/master/lib/rvm/gemrc > ~/.ge
 
 # Install latest bundler version so we can install all application gems
 gem install bundler
+gem install bundler --pre
 
-# Install Bluepill for process monitoring
-gem install bluepill
-mkdir -p /var/bluepill && chown -R $DEPLOYER_USERNAME:www-data /var/bluepill
-
-# Install Backup for performing backups
-gem install backup
+# Install Foreman for process monitoring with Upstart
+gem install foreman
 
 # Ensure the deployment user is added to the RVM group
 usermod -G rvm $DEPLOYER_USERNAME
