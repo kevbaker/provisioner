@@ -1,7 +1,8 @@
 #! /bin/bash
 
 install(){
-  curl https://raw.github.com/meskyanichi/provisioner/master/lib/$1/provision | bash
+  curl https://raw.github.com/kevbaker/provisioner/master/lib/$1/provision | bash
+#  curl https://raw.github.com/meskyanichi/provisioner/master/lib/$1/provision | bash
 }
 
 ## Basic package updates, upgrades and new installations
